@@ -7,7 +7,9 @@ The demo application is a minimal Python application managed with
 
 ## Functional Requirements
 
-1. The application prints "Hello World" to standard output and exits.
+1. The application prints "Hello <username>" to standard output (where
+   <username> is the current system login name), falling back to
+   "Hello World" if the username cannot be determined, and exits.
 
 ## Technical Requirements
 
