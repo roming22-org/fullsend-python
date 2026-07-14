@@ -26,6 +26,12 @@ uv sync
 uv run demo
 ```
 
+### Run tests
+
+```bash
+uv run pytest
+```
+
 ### Project conventions
 
 - Use `uv` for all dependency and lifecycle management.
