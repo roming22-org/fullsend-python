@@ -1,7 +1,7 @@
 [project]
 name = "demo"
 version = "0.1.0"
-description = "A demo Python application that prints Hello World"
+description = "A demo Python application that greets the current user"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []

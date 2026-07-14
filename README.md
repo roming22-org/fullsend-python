@@ -1,7 +1,7 @@
 # fullsend-python
 
-A demo Python application that prints "Hello World", managed with
-[uv](https://docs.astral.sh/uv/).
+A demo Python application that greets the current system user, managed
+with [uv](https://docs.astral.sh/uv/).
 
 ## Prerequisites
 
