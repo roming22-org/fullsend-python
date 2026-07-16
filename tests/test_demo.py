@@ -1,5 +1,7 @@
 """Tests for the demo application."""
 
+import subprocess
+import sys
 from unittest.mock import patch
 
 from demo import get_username, main
@@ -35,3 +37,18 @@ class TestMain:
             main()
         captured = capsys.readouterr()
         assert captured.out == "Hello World\n"
+
+
+class TestTyping:
+    """Tests for type annotations."""
+
+    def test_mypy_strict(self):
+        """mypy --strict reports no errors on the demo package."""
+        result = subprocess.run(
+            [sys.executable, "-m", "mypy", "--strict", "src/demo/"],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, (
+            f"mypy --strict failed:\n{result.stdout}\n{result.stderr}"
+        )

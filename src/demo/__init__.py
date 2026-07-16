@@ -1,7 +1,7 @@
 import getpass
 
 
-def get_username():
+def get_username() -> str:
     """Return the current system username, or 'World' if unavailable."""
     try:
         return getpass.getuser()
@@ -9,7 +9,7 @@ def get_username():
         return "World"
 
 
-def main():
+def main() -> None:
     """Print a greeting with the current username."""
-    name = get_username()
+    name: str = get_username()
     print(f"Hello {name}")
