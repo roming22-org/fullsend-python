@@ -16,6 +16,7 @@ uv run demo      # Run the application
 ## Project Layout
 
 - `src/demo/` - Application source code
+- `tests/` - Test suite
 - `docs/` - Project documentation
 - `.devcontainer/` - Dev container configuration
 

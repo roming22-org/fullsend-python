@@ -29,6 +29,7 @@ Open this repository in a devcontainer for a pre-configured environment with Pyt
 
 ```
 src/demo/       - Application source code
+tests/          - Test suite
 docs/           - Project documentation
 .devcontainer/  - Dev container configuration
 ```
