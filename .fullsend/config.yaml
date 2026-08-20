@@ -19,3 +19,6 @@ create_issues:
         repos:
             - roming22-org/fullsend-python
             - fullsend-ai/fullsend
+inference:
+    project: it-gcp-tsd-rarnaud
+    wif_provider: projects/733578211576/locations/global/workloadIdentityPools/fullsend-inference/providers/gh-roming22-org-fullsend-python
