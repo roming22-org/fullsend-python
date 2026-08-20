@@ -19,14 +19,6 @@
 # stage jobs with -agent- suffix. Roles operate independently (#2452).
 name: fullsend
 
-permissions:
-  actions: write
-  id-token: write
-  contents: write
-  issues: write
-  packages: read
-  pull-requests: write
-
 on:
   issues:
     types: [opened, edited, labeled]
@@ -37,6 +29,8 @@ on:
   pull_request_review:
     types: [submitted]
 
+permissions: {}
+
 jobs:
   dispatch:
     if: >-
@@ -44,7 +38,14 @@ jobs:
        || github.event.pull_request.head.ref != 'fullsend/scaffold-install')
       && (github.event_name != 'issue_comment'
        || github.event.comment.user.type != 'Bot')
-    uses: fullsend-ai/fullsend/.github/workflows/reusable-dispatch.yml@6df635a109f4951505ae2d7399e7d52fe15f4518 # v0.33.0
+    permissions:
+      actions: write
+      id-token: write
+      contents: write
+      issues: write
+      packages: read
+      pull-requests: write
+    uses: fullsend-ai/fullsend/.github/workflows/reusable-dispatch.yml@65ceb961020290e43b008daa380765b44f35c5df # v0.36.0
     with:
       event_action: ${{ github.event.action }}
       install_mode: per-repo
@@ -55,6 +56,7 @@ jobs:
       FULLSEND_GCP_WIF_PROVIDER: ${{ secrets.FULLSEND_GCP_WIF_PROVIDER }}
       FULLSEND_GCP_PROJECT_ID: ${{ secrets.FULLSEND_GCP_PROJECT_ID }}
       OTEL_EXPORTER_OTLP_TRACES_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_TRACES_HEADERS }}
+      OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
 
   stop-fix:
     # Job-level if: is intentionally coarse — it only screens for the
