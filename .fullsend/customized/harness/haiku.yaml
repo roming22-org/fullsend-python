@@ -1,0 +1,32 @@
+agent: agents/haiku.md
+image: ghcr.io/fullsend-ai/fullsend-sandbox:latest
+policy: policies/base.yaml
+providers:
+  - vertex-ai
+role: haiku
+slug: roming22-org-haiku
+
+trigger: >
+  event.transition.kind == "label_changed"
+    && event.transition.label.name == "haiku"
+    && event.transition.label.action == "added"
+
+pre_script: scripts/pre-haiku.sh
+post_script: scripts/post-haiku.sh
+
+host_files:
+  - src: /tmp/haiku-input/cat.jpg
+    dest: /sandbox/workspace/cat.jpg
+  - src: /tmp/haiku-input/cat.b64
+    dest: /sandbox/workspace/cat.b64
+
+timeout_minutes: 10
+
+forge:
+  github:
+    pre_script: scripts/pre-haiku.sh
+    post_script: scripts/post-haiku.sh
+    env:
+      runner:
+        ISSUE_URL: "${ISSUE_URL}"
+        GH_TOKEN: "${GH_TOKEN}"
