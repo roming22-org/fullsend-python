@@ -3,7 +3,7 @@ image: ghcr.io/fullsend-ai/fullsend-sandbox:latest
 policy: policies/base.yaml
 providers:
   - vertex-ai
-role: haiku
+role: triage
 slug: roming22-org-haiku
 
 trigger: >
