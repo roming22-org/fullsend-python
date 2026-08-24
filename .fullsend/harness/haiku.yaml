@@ -11,7 +11,14 @@ trigger: >
     && event.transition.label.name == "haiku"
     && event.transition.label.action == "added"
 
+pre_script: scripts/pre-haiku.sh
 post_script: scripts/post-haiku.sh
+
+host_files:
+  - src: /tmp/haiku-input/cat.jpg
+    dest: /sandbox/workspace/cat.jpg
+  - src: /tmp/haiku-input/cat.b64
+    dest: /sandbox/workspace/cat.b64
 
 timeout_minutes: 10
 
