@@ -21,7 +21,7 @@ create_issues:
             - fullsend-ai/fullsend
 agents:
     - name: haiku
-      source: customized/harness/haiku.yaml
+      source: harness/haiku.yaml
 inference:
     project: it-gcp-tsd-rarnaud
     wif_provider: projects/733578211576/locations/global/workloadIdentityPools/fullsend-inference/providers/gh-roming22-org-fullsend-python
