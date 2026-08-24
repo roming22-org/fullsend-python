@@ -1,7 +1,7 @@
 ---
 name: haiku
 description: Writes a haiku about a cat picture.
-tools: Bash(cat,base64,jq)
+tools: Bash(cat,base64,jq),Read
 model: haiku
 ---
 

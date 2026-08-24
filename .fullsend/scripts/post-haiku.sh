@@ -6,17 +6,17 @@
 # and posts a GitHub comment on the triggering issue or PR.
 #
 # Required env vars:
-#   ISSUE_URL  — HTML URL of the issue or PR
-#   GH_TOKEN   — GitHub token with issues/pull-requests write scope
+#   GITHUB_ISSUE_URL — HTML URL of the issue or PR
+#   GH_TOKEN         — GitHub token with issues/pull-requests write scope
 
 set -euo pipefail
 
-: "${ISSUE_URL:?ISSUE_URL must be set}"
+: "${GITHUB_ISSUE_URL:?GITHUB_ISSUE_URL must be set}"
 
 # --- Parse issue URL ---
 
-REPO=$(echo "${ISSUE_URL}" | sed 's|https://github.com/||; s|/issues/.*||; s|/pull/.*||')
-ISSUE_NUMBER=$(basename "${ISSUE_URL}")
+REPO=$(echo "${GITHUB_ISSUE_URL}" | sed 's|https://github.com/||; s|/issues/.*||; s|/pull/.*||')
+ISSUE_NUMBER=$(basename "${GITHUB_ISSUE_URL}")
 
 # --- Find agent output ---
 
