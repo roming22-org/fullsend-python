@@ -56,9 +56,9 @@ fi
 
 # --- Build the comment ---
 
-# Try to get the permanent cat URL saved by the pre-script
-CAT_URL=""
-if [[ -f "/tmp/haiku-input/cat-url.txt" ]]; then
+# Try to get the cat URL from the agent output, fall back to host file
+CAT_URL=$(jq -r '.cat_url // empty' "${RESULT_FILE}" 2>/dev/null || true)
+if [[ -z "${CAT_URL}" ]] && [[ -f "/tmp/haiku-input/cat-url.txt" ]]; then
   CAT_URL=$(cat /tmp/haiku-input/cat-url.txt)
 fi
 
