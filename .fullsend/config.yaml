@@ -3,7 +3,12 @@
 #
 # This file configures fullsend for per-repo installation mode.
 # See ADR 0033 for details.
+#
+# The "runtime" key selects which agent runtime runs the agents, claude
+# (default when unset) or pi. For one run, the 'fullsend run --runtime'
+# flag wins, then FULLSEND_RUNTIME, then this file. See docs/runtimes.md.
 version: "1"
+runtime: claude
 roles:
     - triage
     - coder
@@ -19,9 +24,6 @@ create_issues:
         repos:
             - roming22-org/fullsend-python
             - fullsend-ai/fullsend
-agents:
-    - name: haiku
-      source: harness/haiku.yaml
 inference:
     project: it-gcp-tsd-rarnaud
     wif_provider: projects/733578211576/locations/global/workloadIdentityPools/fullsend-inference/providers/gh-roming22-org-fullsend-python
