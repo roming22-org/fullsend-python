@@ -64,7 +64,7 @@ fi
 
 # Build the comment body with the image and haiku
 if [[ -n "${CAT_URL}" ]]; then
-  # Use the permanent cataas.com URL for the image
+  # Use the permanent URL for the image
   COMMENT_BODY=$(cat <<EOF
 ![Cat](${CAT_URL})
 
@@ -72,42 +72,15 @@ ${HAIKU}
 EOF
 )
 else
-  # No permanent URL available; decode the base64 image data to a temp
-  # file and upload it as a public GitHub gist so we have a linkable URL.
-  TMPIMG=$(mktemp /tmp/cat-XXXXXX.jpg)
-  printf '%s' "${IMAGE_B64}" | base64 -d > "${TMPIMG}"
-
-  UPLOADED_URL=""
-  if GIST_URL=$(gh gist create --public "${TMPIMG}" 2>/dev/null); then
-    GIST_ID=$(basename "${GIST_URL}")
-    UPLOADED_URL=$(gh api "gists/${GIST_ID}" \
-      --jq '.files | to_entries[0].value.raw_url' 2>/dev/null || true)
-  fi
-  rm -f "${TMPIMG}"
-
-  if [[ -n "${UPLOADED_URL}" ]]; then
-    COMMENT_BODY=$(cat <<EOF
-![Cat](${UPLOADED_URL})
-
-${HAIKU}
-EOF
-)
-  else
-    # Upload failed; include base64 in a details block as last resort.
-    COMMENT_BODY=$(cat <<EOF
+  # No permanent URL available — post the haiku without an inline image.
+  # This is preferable to dumping raw base64 data which is unreadable.
+  echo "Warning: No permanent image URL available, posting haiku without image"
+  COMMENT_BODY=$(cat <<EOF
 ${HAIKU}
 
-<details>
-<summary>Cat image (base64)</summary>
-
-\`\`\`
-${IMAGE_B64}
-\`\`\`
-
-</details>
+*🐱 (cat image could not be displayed)*
 EOF
 )
-  fi
 fi
 
 # --- Post the comment ---
