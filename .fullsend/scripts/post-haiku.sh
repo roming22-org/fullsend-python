@@ -72,9 +72,29 @@ ${HAIKU}
 EOF
 )
 else
-  # No permanent URL available; decode and try to upload via gist,
-  # otherwise fall back to text-only with base64 in a details block.
-  COMMENT_BODY=$(cat <<EOF
+  # No permanent URL available; decode the base64 image data to a temp
+  # file and upload it as a public GitHub gist so we have a linkable URL.
+  TMPIMG=$(mktemp /tmp/cat-XXXXXX.jpg)
+  printf '%s' "${IMAGE_B64}" | base64 -d > "${TMPIMG}"
+
+  UPLOADED_URL=""
+  if GIST_URL=$(gh gist create --public "${TMPIMG}" 2>/dev/null); then
+    GIST_ID=$(basename "${GIST_URL}")
+    UPLOADED_URL=$(gh api "gists/${GIST_ID}" \
+      --jq '.files | to_entries[0].value.raw_url' 2>/dev/null || true)
+  fi
+  rm -f "${TMPIMG}"
+
+  if [[ -n "${UPLOADED_URL}" ]]; then
+    COMMENT_BODY=$(cat <<EOF
+![Cat](${UPLOADED_URL})
+
+${HAIKU}
+EOF
+)
+  else
+    # Upload failed; include base64 in a details block as last resort.
+    COMMENT_BODY=$(cat <<EOF
 ${HAIKU}
 
 <details>
@@ -87,6 +107,7 @@ ${IMAGE_B64}
 </details>
 EOF
 )
+  fi
 fi
 
 # --- Post the comment ---
