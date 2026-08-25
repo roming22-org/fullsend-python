@@ -14,6 +14,16 @@ trigger: >
 pre_script: scripts/pre-haiku.sh
 post_script: scripts/post-haiku.sh
 
+host_files:
+  - src: env/gcp-vertex.env
+    dest: /sandbox/workspace/.env.d/gcp-vertex.env
+    expand: true
+  - src: ${GOOGLE_APPLICATION_CREDENTIALS}
+    dest: /tmp/.gcp-credentials.json
+  - src: ${GCP_OIDC_TOKEN_FILE}
+    dest: /sandbox/workspace/.gcp-oidc-token
+    optional: true
+
 timeout_minutes: 10
 
 overlays:
