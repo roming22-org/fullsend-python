@@ -56,11 +56,8 @@ fi
 
 # --- Build the comment ---
 
-# Try to get the permanent cat URL saved by the pre-script
-CAT_URL=""
-if [[ -f "/tmp/haiku-input/cat-url.txt" ]]; then
-  CAT_URL=$(cat /tmp/haiku-input/cat-url.txt)
-fi
+# Read the cat URL from the agent output JSON
+CAT_URL=$(jq -r '.cat_url // empty' "${RESULT_FILE}" 2>/dev/null || true)
 
 # Build the comment body with the image and haiku
 if [[ -n "${CAT_URL}" ]]; then
