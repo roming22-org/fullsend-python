@@ -2,13 +2,10 @@
 # pre-haiku.sh — Download a cat image for the haiku agent.
 #
 # Runs on the host runner before the sandbox starts.
-# Downloads a random cat image from cataas.com, base64 encodes it,
-# and saves both the raw image and encoded data for host_files to
-# copy into the sandbox.
+# Downloads a random cat image from cataas.com.
 #
 # Outputs:
-#   /tmp/haiku-input/cat.jpg  — raw cat image
-#   /tmp/haiku-input/cat.b64  — base64 encoded image
+#   /sandbox/workspace/cat.jpg  — raw cat image
 #   /tmp/haiku-input/cat-url.txt — permanent URL to the cat image (if available)
 
 set -euo pipefail

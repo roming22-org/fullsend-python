@@ -48,12 +48,6 @@ if [[ -z "${HAIKU}" ]]; then
   exit 1
 fi
 
-IMAGE_B64=$(jq -r '.image // empty' "${RESULT_FILE}")
-if [[ -z "${IMAGE_B64}" ]]; then
-  echo "ERROR: image field is empty or missing in agent output" >&2
-  exit 1
-fi
-
 # --- Build the comment ---
 
 # Try to get the permanent cat URL saved by the pre-script

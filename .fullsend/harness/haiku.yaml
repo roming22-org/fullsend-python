@@ -23,6 +23,9 @@ host_files:
   - src: ${GCP_OIDC_TOKEN_FILE}
     dest: /sandbox/workspace/.gcp-oidc-token
     optional: true
+  - src: /tmp/haiku-input/cat.jpg
+    dest: /sandbox/workspace/cat.jpg
+    optional: true
 
 timeout_minutes: 10
 
