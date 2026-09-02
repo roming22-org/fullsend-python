@@ -22,19 +22,13 @@ echo "Fetching cat image from cataas.com..."
 # can link to it in the GitHub comment.
 CAT_ID=""
 if CAT_JSON=$(curl -sL --max-time 10 "https://cataas.com/cat?json=true" 2>/dev/null); then
-  CAT_ID=$(printf '%s' "${CAT_JSON}" | jq -r '._id // empty' 2>/dev/null || true)
+  CAT_ID=$(printf '%s' "${CAT_JSON}" | jq -r '.id // empty' 2>/dev/null || true)
 fi
 
-if [[ -n "${CAT_ID}" ]]; then
-  CAT_URL="https://cataas.com/cat/${CAT_ID}"
-  echo "Downloading cat ${CAT_ID}..."
-  curl -sL --max-time 30 -o "${INPUT_DIR}/cat.jpg" "${CAT_URL}"
-  echo "${CAT_URL}" > "${INPUT_DIR}/cat-url.txt"
-else
-  echo "Could not get cat ID, downloading random cat..."
-  curl -sL --max-time 30 -o "${INPUT_DIR}/cat.jpg" "https://cataas.com/cat"
-  echo "" > "${INPUT_DIR}/cat-url.txt"
-fi
+CAT_URL="https://cataas.com/cat/${CAT_ID}"
+echo "Downloading cat ${CAT_ID}..."
+curl -sL --max-time 30 -o "${INPUT_DIR}/cat.jpg" "${CAT_URL}"
+echo "${CAT_URL}" > "${INPUT_DIR}/cat-url.txt"
 
 # Verify we got a non-empty image
 FILE_SIZE=$(wc -c < "${INPUT_DIR}/cat.jpg")
@@ -42,9 +36,6 @@ if [[ "${FILE_SIZE}" -lt 100 ]]; then
   echo "ERROR: Downloaded file is too small (${FILE_SIZE} bytes), likely not a valid image" >&2
   exit 1
 fi
-
-# Base64 encode the image
-base64 < "${INPUT_DIR}/cat.jpg" > "${INPUT_DIR}/cat.b64"
 
 echo "Cat image saved (${FILE_SIZE} bytes)"
 echo "Pre-script complete."

@@ -16,10 +16,7 @@ a haiku about it.
 2. Compose a haiku (three lines following the 5-7-5 syllable pattern)
    inspired by what you see in the image.
 
-3. Read the base64-encoded image data from `/sandbox/workspace/cat.b64`:
-   ```bash
-   IMAGE_B64=$(cat /sandbox/workspace/cat.b64)
-   ```
+3. Read the image data from `/sandbox/workspace/cat.jpg`.
 
 4. Write the result as JSON to `$FULLSEND_OUTPUT_DIR/agent-result.json`:
    ```bash
@@ -30,11 +27,10 @@ a haiku about it.
 
 ## Output format
 
-The output must be a JSON object with exactly two fields:
+The output must be a JSON object with exactly one field:
 
 ```json
 {
-  "image": "<base64 encoded image content>",
   "haiku": "<the haiku text, three lines separated by newlines>"
 }
 ```

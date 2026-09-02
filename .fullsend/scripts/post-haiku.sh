@@ -57,37 +57,18 @@ fi
 # --- Build the comment ---
 
 # Try to get the permanent cat URL saved by the pre-script
-CAT_URL=""
-if [[ -f "/tmp/haiku-input/cat-url.txt" ]]; then
-  CAT_URL=$(cat /tmp/haiku-input/cat-url.txt)
+CAT_URL="/tmp/haiku-input/cat-url.txt"
+if [[ -f "${CAT_URL}" ]]; then
+  CAT_URL=$(cat "${CAT_URL}")
 fi
 
 # Build the comment body with the image and haiku
-if [[ -n "${CAT_URL}" ]]; then
-  # Use the permanent cataas.com URL for the image
-  COMMENT_BODY=$(cat <<EOF
+COMMENT_BODY=$(cat <<EOF
 ![Cat](${CAT_URL})
 
 ${HAIKU}
 EOF
 )
-else
-  # No permanent URL available; decode and try to upload via gist,
-  # otherwise fall back to text-only with base64 in a details block.
-  COMMENT_BODY=$(cat <<EOF
-${HAIKU}
-
-<details>
-<summary>Cat image (base64)</summary>
-
-\`\`\`
-${IMAGE_B64}
-\`\`\`
-
-</details>
-EOF
-)
-fi
 
 # --- Post the comment ---
 
