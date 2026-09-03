@@ -11,5 +11,6 @@ endpoints:
     enforcement: enforce
 binaries:
   - "**/claude"
+  - "**/claude.exe"
   - "**/pi"
   - "**/node"
