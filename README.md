@@ -1,6 +1,7 @@
 # fullsend-python
 
-A demo Python application that prints "Hello World".
+A demo Python application that greets the current user by name. If the
+username cannot be determined, it falls back to "Hello World".
 
 ## Prerequisites
 
