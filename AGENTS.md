@@ -23,4 +23,5 @@ This is a Python application managed with `uv`. The application prints
 - Use `uv` for all dependency and lifecycle management.
 - Source code lives under `src/fullsend_python/`.
 - Keep the application entry point in `src/fullsend_python/main.py`.
+- Always commit `uv.lock` — this is an application (not a library), so the lock file must be tracked for reproducible dependency resolution. Never add `uv.lock` to `.gitignore`.
 - Document requirements in the `docs/` folder.
