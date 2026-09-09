@@ -2,7 +2,7 @@
 
 ## Application Requirements
 
-1. The application prints "Hello World" to standard output.
+1. The application greets the current user by name (e.g., "Hello Alice"). If the username cannot be determined, it falls back to "Hello World".
 2. The application is managed using `uv` for dependency and lifecycle management.
 3. Python 3.12 or later is required.
 
