@@ -2,8 +2,9 @@
 
 ## Project Overview
 
-This is a Python application managed with `uv`. The application prints
-"Hello World" to standard output.
+This is a Python application managed with `uv`. The application greets
+the current user by name (e.g., "Hello Alice"). If the username cannot
+be determined, it falls back to "Hello World".
 
 ## Build and Run
 

@@ -13,13 +13,13 @@ def test_get_greeting_name_falls_back_to_world():
         assert get_greeting_name() == "World"
 
 
-def test_greets_current_user(capsys):
+def test_main_greets_current_user(capsys):
     with patch("fullsend_python.main.getpass.getuser", return_value="Alice"):
         main()
     assert capsys.readouterr().out.strip() == "Hello Alice"
 
 
-def test_falls_back_to_world(capsys):
+def test_main_falls_back_to_world(capsys):
     with patch("fullsend_python.main.getpass.getuser", side_effect=Exception):
         main()
     assert capsys.readouterr().out.strip() == "Hello World"

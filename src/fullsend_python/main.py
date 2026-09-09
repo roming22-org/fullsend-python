@@ -9,7 +9,7 @@ def get_greeting_name() -> str:
         return "World"
 
 
-def main():
+def main() -> None:
     print(f"Hello {get_greeting_name()}")
 
 
