@@ -25,3 +25,6 @@ be determined, it falls back to "Hello World".
 - Source code lives under `src/fullsend_python/`.
 - Keep the application entry point in `src/fullsend_python/main.py`.
 - Document requirements in the `docs/` folder.
+- All functions must have return type annotations (use `-> None` for functions that return nothing).
+- Test functions follow the pattern `test_<function_name>_<behavior>` (e.g., `test_get_greeting_name_returns_username`).
+- Run tests with `uv run pytest tests/ -v`.
